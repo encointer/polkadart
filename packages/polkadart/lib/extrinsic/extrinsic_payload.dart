@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart';
-import 'package:polkadart/extrinsic/signature_type.dart';
+import 'package:polkadart/extrinsic/extrinsic.dart';
 import 'package:polkadart/extrinsic/signed_extensions/community_identifier.dart';
 import 'package:polkadart/extrinsic/signed_extensions/signed_extensions_abstract.dart';
 import 'package:polkadart_keyring/polkadart_keyring.dart' as keyring;
@@ -30,6 +30,17 @@ class Extrinsic {
     required this.tip,
     this.assetId,
   });
+
+  Extrinsic.withSigningPayload({
+    required this.signer,
+    required this.method,
+    required this.signature,
+    required SigningPayload payload,
+  })  : eraPeriod = payload.eraPeriod,
+        blockNumber = payload.blockNumber,
+        nonce = payload.nonce,
+        tip = payload.tip,
+        assetId = payload.assetId;
 
   toEncodedMap(dynamic registry) {
     return {

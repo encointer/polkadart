@@ -74,14 +74,11 @@ Future<void> main(List<String> arguments) async {
   final hexSignature = hex.encode(signature);
   print('Signature: $hexSignature');
 
-  final extrinsic = Extrinsic(
+  final extrinsic = Extrinsic.withSigningPayload(
     signer: alicePublicKey,
     method: encodedCall,
     signature: hexSignature,
-    eraPeriod: 64,
-    blockNumber: blockNumber,
-    nonce: accountInfo.nonce,
-    tip: 0,
+    payload: payloadToSign
   ).encode(api.registry, SignatureType.sr25519);
 
   final hexExtrinsic = hex.encode(extrinsic);
