@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:convert/convert.dart';
 import 'package:polkadart/extrinsic/signature_type.dart';
+import 'package:polkadart/extrinsic/signed_extensions/community_identifier.dart';
 import 'package:polkadart/extrinsic/signed_extensions/signed_extensions_abstract.dart';
 import 'package:polkadart_keyring/polkadart_keyring.dart' as keyring;
 import 'package:polkadart_scale_codec/primitives/primitives.dart';
@@ -17,7 +18,7 @@ class Extrinsic {
   final int blockNumber;
   final int nonce;
   final dynamic tip;
-  final int? assetId;
+  final CommunityIdentifier? assetId;
 
   const Extrinsic({
     required this.signer,
@@ -116,7 +117,7 @@ class Extrinsic {
 
   String maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
-      return assetId != null ? assetId!.toRadixString(16) : '00';
+      return assetId != null ? encodeHex(assetId!.encode()) : '00';
     } else {
       return '';
     }
