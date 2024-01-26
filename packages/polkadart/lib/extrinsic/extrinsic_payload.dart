@@ -78,7 +78,7 @@ class Extrinsic {
 
     for (final signedExtensiontype in registry.getSignedExtensionTypes()) {
       final payload =
-          signedExtensions.signedExtension(signedExtensiontype, toEncodedMap());
+          signedExtensions.signedExtension(signedExtensiontype, toEncodedMap(registry));
 
       if (payload.isNotEmpty) {
         extras.add(payload);
@@ -115,9 +115,9 @@ class Extrinsic {
     return registry.getSignedExtensionTypes().contains('ChargeAssetTxPayment');
   }
 
-  String maybeAssetIdEncoded(dynamic registry) {
+  dynamic maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
-      return assetId != null ? encodeHex(assetId!.encode()) : '00';
+      return assetId != null ? assetId!.encode() : '00';
     } else {
       return '';
     }

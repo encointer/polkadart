@@ -67,7 +67,7 @@ class SigningPayload {
 
     registry.getSignedExtensionTypes().forEach((extension) {
       final payload =
-          signedExtensions.signedExtension(extension, toEncodedMap());
+          signedExtensions.signedExtension(extension, toEncodedMap(registry));
 
       if (payload.isNotEmpty) {
         extras.add(payload);
@@ -76,7 +76,7 @@ class SigningPayload {
 
     registry.getSignedExtensionExtra().forEach((extension) {
       final payload =
-          signedExtensions.additionalSignedExtension(extension, toEncodedMap());
+          signedExtensions.additionalSignedExtension(extension, toEncodedMap(registry));
 
       if (payload.isNotEmpty) {
         additionalExtras.add(payload);
@@ -94,9 +94,9 @@ class SigningPayload {
     return registry.getSignedExtensionTypes().contains('ChargeAssetTxPayment');
   }
 
-  String maybeAssetIdEncoded(dynamic registry) {
+  dynamic maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
-      return assetId != null ? encodeHex(assetId!.encode()) : '00';
+      return assetId != null ? assetId!.encode() : '00';
     } else {
       return '';
     }
