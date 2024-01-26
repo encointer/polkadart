@@ -94,9 +94,9 @@ class SigningPayload {
     return registry.getSignedExtensionTypes().contains('ChargeAssetTxPayment');
   }
 
-  dynamic maybeAssetIdEncoded(dynamic registry) {
+  String maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
-      return assetId != null ? assetId!.encode() : '00';
+      return assetId != null ? encodeHex(assetId!.encode()) : '00';
     } else {
       return '';
     }
