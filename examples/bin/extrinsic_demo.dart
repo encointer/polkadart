@@ -13,7 +13,7 @@ import 'package:polkadart_example/generated/polkadot/polkadot.dart';
 import 'package:polkadart_example/generated/polkadot/types/sp_runtime/multiaddress/multi_address.dart';
 
 Future<void> main(List<String> arguments) async {
-  final provider = Provider.fromUri(Uri.parse('wss://rpc.polkadot.io'));
+  final provider = Provider.fromUri(Uri.parse('ws://127.0.0.1:9944'));
   final api = Polkadot(provider);
 
   final stateApi = StateApi(provider);
@@ -52,6 +52,9 @@ Future<void> main(List<String> arguments) async {
   final encodedCall = hex.encode(runtimeCall.encode());
   print('Encoded call: $encodedCall');
 
+  final accountInfo = await api.query.system.account(alice.publicKey.bytes);
+  print('Nonce: ${accountInfo.nonce}');
+
   final payloadToSign = SigningPayload(
     method: encodedCall,
     specVersion: specVersion,
@@ -60,7 +63,7 @@ Future<void> main(List<String> arguments) async {
     blockHash: blockHash,
     blockNumber: blockNumber,
     eraPeriod: 64,
-    nonce: 0, // Supposing it is this wallet first transaction
+    nonce: accountInfo.nonce,
     tip: 0,
   );
 
@@ -77,7 +80,7 @@ Future<void> main(List<String> arguments) async {
     signature: hexSignature,
     eraPeriod: 64,
     blockNumber: blockNumber,
-    nonce: 0,
+    nonce: accountInfo.nonce,
     tip: 0,
   ).encode(api.registry, SignatureType.sr25519);
 
