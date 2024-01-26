@@ -36,13 +36,19 @@ Future<void> main(List<String> arguments) async {
       .result
       .replaceAll('0x', '');
 
-  final keyring = await KeyPair.sr25519.fromMnemonic(
-      "resource mirror lecture smooth midnight muffin position cup pepper fruit vanish also//0"); // This is a random key
+  final alice = await KeyPair.sr25519.fromUri('//Alice');
+  final bob = await KeyPair.sr25519.fromUri('//Bob');
 
-  final publicKey = hex.encode(keyring.publicKey.bytes);
-  print('Public Key: $publicKey');
-  final dest = $MultiAddress().id(hex.decode(publicKey));
-  final runtimeCall = api.tx.balances.transferAll(dest: dest, keepAlive: true);
+  final alicePublicKey = hex.encode(alice.publicKey.bytes);
+  print('Public Key: $alicePublicKey');
+  final bobMultiAddress = $MultiAddress().id(bob.publicKey.bytes);
+
+  // Most chains have configured 12 decimals.
+  const oneBalanceUnit = 1000000000000;
+  final runtimeCall = api.tx.balances.transferKeepAlive(
+    dest: bobMultiAddress,
+    value: BigInt.from(oneBalanceUnit),
+  );
   final encodedCall = hex.encode(runtimeCall.encode());
   print('Encoded call: $encodedCall');
 
@@ -61,12 +67,12 @@ Future<void> main(List<String> arguments) async {
   final payload = payloadToSign.encode(api.registry);
   print('Payload: ${hex.encode(payload)}');
 
-  final signature = keyring.sign(payload);
+  final signature = alice.sign(payload);
   final hexSignature = hex.encode(signature);
   print('Signature: $hexSignature');
 
   final extrinsic = Extrinsic(
-    signer: publicKey,
+    signer: alicePublicKey,
     method: encodedCall,
     signature: hexSignature,
     eraPeriod: 64,
