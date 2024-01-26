@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:convert/convert.dart';
-import 'package:polkadart/extrinsic/signed_extensions/community_identifier.dart';
+import 'package:polkadart/primitives/community_identifier.dart';
 import 'package:polkadart/extrinsic/signed_extensions/signed_extensions_abstract.dart';
 import 'package:polkadart/scale_codec.dart';
 import 'package:polkadart/substrate/era.dart';

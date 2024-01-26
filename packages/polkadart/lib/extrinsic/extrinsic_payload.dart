@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:convert/convert.dart';
 import 'package:polkadart/extrinsic/extrinsic.dart';
-import 'package:polkadart/extrinsic/signed_extensions/community_identifier.dart';
+import 'package:polkadart/primitives/community_identifier.dart';
 import 'package:polkadart/extrinsic/signed_extensions/signed_extensions_abstract.dart';
 import 'package:polkadart_keyring/polkadart_keyring.dart' as keyring;
 import 'package:polkadart_scale_codec/primitives/primitives.dart';
