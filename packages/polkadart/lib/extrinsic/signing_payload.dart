@@ -66,8 +66,10 @@ class SigningPayload {
     }
 
     registry.getSignedExtensionTypes().forEach((extension) {
-      final payload =
-          signedExtensions.signedExtension(extension, toEncodedMap(registry));
+      final payload = signedExtensions.signedExtension(
+        extension,
+        toEncodedMap(registry),
+      );
 
       if (payload.isNotEmpty) {
         extras.add(payload);

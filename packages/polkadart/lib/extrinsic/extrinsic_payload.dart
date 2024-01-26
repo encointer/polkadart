@@ -89,7 +89,9 @@ class Extrinsic {
 
     for (final signedExtensiontype in registry.getSignedExtensionTypes()) {
       final payload = signedExtensions.signedExtension(
-          signedExtensiontype, toEncodedMap(registry));
+        signedExtensiontype,
+        toEncodedMap(registry),
+      );
 
       if (payload.isNotEmpty) {
         extras.add(payload);
