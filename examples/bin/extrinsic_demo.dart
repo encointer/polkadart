@@ -1,12 +1,8 @@
+import 'dart:convert';
+
 import 'package:convert/convert.dart';
 import 'package:polkadart/polkadart.dart'
-    show
-        AuthorApi,
-        Extrinsic,
-        Provider,
-        SignatureType,
-        SigningPayload,
-        StateApi;
+    show AuthorApi, CommunityIdentifier, Extrinsic, Provider, SignatureType, SigningPayload, StateApi;
 import 'package:polkadart_keyring/polkadart_keyring.dart';
 
 import 'package:polkadart_example/generated/polkadot/polkadot.dart';
@@ -55,6 +51,8 @@ Future<void> main(List<String> arguments) async {
   final accountInfo = await api.query.system.account(alice.publicKey.bytes);
   print('Nonce: ${accountInfo.nonce}');
 
+  final paymentAsset =  CommunityIdentifier(geohash: utf8.encode('sqm1v'),digest: hex.decode('f08c911c'));
+
   final payloadToSign = SigningPayload(
     method: encodedCall,
     specVersion: specVersion,
@@ -65,6 +63,7 @@ Future<void> main(List<String> arguments) async {
     eraPeriod: 64,
     nonce: accountInfo.nonce,
     tip: 0,
+    assetId: paymentAsset
   );
 
   final payload = payloadToSign.encode(api.registry);

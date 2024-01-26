@@ -98,7 +98,7 @@ class SigningPayload {
 
   String maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
-      return assetId != null ? encodeHex(assetId!.encode()) : '00';
+      return assetId != null ? '01${encodeHex(assetId!.encode())}' : '00';
     } else {
       return '';
     }
