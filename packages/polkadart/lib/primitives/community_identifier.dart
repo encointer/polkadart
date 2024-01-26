@@ -1,5 +1,3 @@
-part of primitives;
-
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:typed_data' as _i2;
 
