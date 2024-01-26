@@ -22,6 +22,7 @@ import 'package:substrate_metadata/substrate_metadata.dart'
 import '../substrate/substrate.dart' show Hasher;
 
 part './api_version.dart';
+part './community_identifier.dart';
 part './chain_type.dart';
 part './extrinsic_status.dart';
 part './event_record.dart';
