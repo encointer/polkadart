@@ -66,10 +66,8 @@ class SigningPayload {
     }
 
     registry.getSignedExtensionTypes().forEach((extension) {
-      final payload = signedExtensions.signedExtension(
-        extension,
-        toEncodedMap(registry),
-      );
+      final payload =
+          signedExtensions.signedExtension(extension, toEncodedMap(registry));
 
       if (payload.isNotEmpty) {
         extras.add(payload);
@@ -78,7 +76,9 @@ class SigningPayload {
 
     registry.getSignedExtensionExtra().forEach((extension) {
       final payload = signedExtensions.additionalSignedExtension(
-          extension, toEncodedMap(registry));
+        extension,
+        toEncodedMap(registry),
+      );
 
       if (payload.isNotEmpty) {
         additionalExtras.add(payload);
@@ -98,6 +98,7 @@ class SigningPayload {
 
   String maybeAssetIdEncoded(dynamic registry) {
     if (_usesChargeAssetTxPayment(registry)) {
+      // '00' and '01' refer to rust's Option variants 'None' and 'Some'.
       return assetId != null ? '01${encodeHex(assetId!.encode())}' : '00';
     } else {
       return '';
