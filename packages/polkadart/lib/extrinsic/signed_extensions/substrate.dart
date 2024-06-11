@@ -17,6 +17,8 @@ class SubstrateSignedExtensions implements SignedExtensions {
         return info['nonce'];
       case 'ChargeTransactionPayment':
         return info['tip'];
+      case 'CheckMetadataHash':
+        return info['metadataHash'];
       default:
         return '';
     }
@@ -37,6 +39,8 @@ class SubstrateSignedExtensions implements SignedExtensions {
         return info['genesisHash'];
       case 'CheckMortality':
         return info['blockHash'];
+      case 'CheckMetadataHash':
+        return info['metadataHash'];
       default:
         return '';
     }
