@@ -1,19 +1,18 @@
 part of utils;
 
-bool validateSpecVersion(dynamic data, {bool reportMultipleErrors = false}) {
-  final schema = JsonSchema.createSchema(SPEC_VERSION_SCHEMA);
-  return schema.validate(data, reportMultipleErrors: reportMultipleErrors);
+bool validateSpecVersion(dynamic data) {
+  final schema = JsonSchema.create(SPEC_VERSION_SCHEMA);
+  return schema.validate(data).isValid;
 }
 
-bool validateSpecVersionArray(dynamic data,
-    {bool reportMultipleErrors = false}) {
-  final schema = JsonSchema.createSchema(
+bool validateSpecVersionArray(dynamic data) {
+  final schema = JsonSchema.create(
     <String, dynamic>{
       'type': 'array',
       'items': SPEC_VERSION_SCHEMA,
     },
   );
-  return schema.validate(data, reportMultipleErrors: reportMultipleErrors);
+  return schema.validate(data).isValid;
 }
 
 List<SpecVersion> readSpecVersionsFromFilePath(String filePath) {
@@ -35,7 +34,7 @@ List<SpecVersion> _readSpecVersionJsonLines(String filePath) {
       throw SpecFileException(
           'Failed to parse record #${result.length + 1} of $file: $e');
     }
-    if (validateSpecVersion(json, reportMultipleErrors: true)) {
+    if (validateSpecVersion(json)) {
       result.add(SpecVersion.fromJson(json));
     } else {
       throw SpecFileException(
