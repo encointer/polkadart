@@ -14,6 +14,10 @@ dependencies:
   merlin: ^1.0.3
   ristretto255: ^1.0.2
   substrate_bip39: ^0.4.0
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0

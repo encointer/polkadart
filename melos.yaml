@@ -1,6 +1,8 @@
 name: polkadart
 repository: https://github.com/leonardocustodio/polkadart
 
+sdkPath: "../encointer-wallet-flutter/.flutter"
+
 command:
   bootstrap:
     usePubspecOverrides: true
@@ -10,11 +12,11 @@ packages:
   - examples
 
 scripts:
-  fetch_dependencies:
-    description: Run dart pub get in a specific package to pre-fetch all the packages.
-    run: melos exec --scope="${SCOPE:-*}" -c 1 -- "dart pub get"
-    select-package:
-      flutter: false
+  pub-get:
+    run: >-
+      dart run melos exec -- \
+      flutter pub get
+    description: "Get pub dependencies"
 
   test:
     run: dart run melos exec --scope="${SCOPE:-*}" -c 1 --fail-fast -- 'dart test --no-chain-stack-traces --ignore-timeouts --coverage="coverage" --concurrency=1'

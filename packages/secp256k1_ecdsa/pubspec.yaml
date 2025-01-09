@@ -9,6 +9,10 @@ environment:
 
 dependencies:
   pointycastle: ^3.7.4
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0

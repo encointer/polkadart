@@ -13,6 +13,10 @@ dependencies:
   pointycastle: ^3.6.2 # BSD-3-Clause
   polkadart_scale_codec: ^1.2.0
   utility: ^1.0.3
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0

@@ -19,6 +19,10 @@ dependencies:
   sr25519: ^0.4.0
   collection: ^1.18.0
   polkadart_scale_codec: ^1.2.0
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0

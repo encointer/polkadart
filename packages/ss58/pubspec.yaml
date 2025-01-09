@@ -12,6 +12,10 @@ dependencies:
   base_x: ^2.0.0 # MIT
   convert: ^3.0.2 # BSD-3-Clause
   cryptography: ^2.0.5 # Apache-2.0
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0

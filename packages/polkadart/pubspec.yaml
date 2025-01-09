@@ -17,6 +17,10 @@ dependencies:
   hashlib_codecs: ^2.2.0 # BSD-3-Clause
   polkadart_keyring: ^0.4.3
   ss58: ^1.1.2
+  flutter_test:
+    sdk: flutter
+  flutter_driver:
+    sdk: flutter
 
 dev_dependencies:
   lints: ^2.0.0
